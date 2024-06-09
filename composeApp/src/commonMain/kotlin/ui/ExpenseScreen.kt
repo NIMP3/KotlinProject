@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import data.ExpenseManager
 import getColorsTheme
 import model.Expense
 import model.ExpenseCategory
@@ -25,8 +27,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen() {
+fun ExpensesScreen(onExpenseClick: (expense: Expense) -> Unit) {
     val colors = getColorsTheme()
+    val expenses = ExpenseManager.fakeExpenseList
+
     Box(Modifier.fillMaxSize().background(colors.backgroundColor)) {
         LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             stickyHeader {
@@ -35,7 +39,9 @@ fun ExpensesScreen() {
                     AllExpensesHeader()
                 }
             }
-
+            items(expenses) { expense ->
+                ExpenseItem(expense = expense, onExpenseClick = onExpenseClick)
+            }
         }
     }
 
@@ -146,8 +152,7 @@ fun ExpenseItem(expense: Expense, onExpenseClick: (expense: Expense) -> Unit) {
 @Preview
 @Composable
 fun ExpenseScreenPreview() {
-    val expense = Expense(id = 12, amount = 1234.0, category = ExpenseCategory.Coffee, description = "Beans and cream")
-    ExpenseItem(expense = expense){
+    ExpensesScreen(){
         
     }
 }

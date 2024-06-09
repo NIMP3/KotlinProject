@@ -8,7 +8,7 @@ import ui.ExpensesScreen
 fun App() {
     PreComposeApp {
         AppTheme {
-            ExpensesScreen()
+            ExpensesScreen() {}
         }
     }
 }
