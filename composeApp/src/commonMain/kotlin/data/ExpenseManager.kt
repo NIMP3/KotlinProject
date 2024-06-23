@@ -18,4 +18,36 @@ object ExpenseManager {
         Expense(id = currentId++, amount = 5.0, category = ExpenseCategory.Snacks, description = "Snacks for road trip"),
         Expense(id = currentId++, amount = 50.0, category = ExpenseCategory.Coffee, description = "Coffee beans")
     )
+
+    fun addExpense(expense: Expense) {
+        fakeExpenseList.add(expense.copy(id = currentId++))
+    }
+
+    fun editExpense(expense: Expense){
+        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
+        if (index != -1) {
+            fakeExpenseList[index] = fakeExpenseList[index].copy(
+                amount = expense.amount,
+                category = expense.category,
+                description = expense.description
+            )
+        }
+    }
+
+    fun deleteExpense(expense: Expense) {
+        val index = fakeExpenseList.indexOfFirst { it.id == expense.id}
+        fakeExpenseList.removeAt(index)
+    }
+
+    fun getCategories(): List<ExpenseCategory> {
+        return listOf(
+            ExpenseCategory.Groceries,
+            ExpenseCategory.Party,
+            ExpenseCategory.Snacks,
+            ExpenseCategory.Coffee,
+            ExpenseCategory.Car,
+            ExpenseCategory.House,
+            ExpenseCategory.Other
+        )
+    }
 }

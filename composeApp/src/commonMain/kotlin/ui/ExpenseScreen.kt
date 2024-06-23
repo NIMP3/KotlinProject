@@ -23,23 +23,23 @@ import getColorsTheme
 import model.Expense
 import model.ExpenseCategory
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import presentation.ExpensesUiState
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen(onExpenseClick: (expense: Expense) -> Unit) {
+fun ExpensesScreen(uiState: ExpensesUiState, onExpenseClick: (expense: Expense) -> Unit) {
     val colors = getColorsTheme()
-    val expenses = ExpenseManager.fakeExpenseList
 
     Box(Modifier.fillMaxSize().background(colors.backgroundColor)) {
         LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             stickyHeader {
                 Column {
-                    ExpensesTotalHeader(1024.0)
+                    ExpensesTotalHeader(uiState.total)
                     AllExpensesHeader()
                 }
             }
-            items(expenses) { expense ->
+            items(uiState.expenses) { expense ->
                 ExpenseItem(expense = expense, onExpenseClick = onExpenseClick)
             }
         }
@@ -152,7 +152,8 @@ fun ExpenseItem(expense: Expense, onExpenseClick: (expense: Expense) -> Unit) {
 @Preview
 @Composable
 fun ExpenseScreenPreview() {
-    ExpensesScreen(){
+    val uiState = ExpensesUiState(expenses = ExpenseManager.fakeExpenseList, total = 1025.0)
+    ExpensesScreen(uiState){
         
     }
 }
