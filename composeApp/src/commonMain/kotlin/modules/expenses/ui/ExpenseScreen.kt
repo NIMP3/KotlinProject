@@ -34,7 +34,7 @@ fun ExpensesScreen(uiState: ExpensesUiState, onExpenseClick: (expense: Expense) 
     Box(Modifier.fillMaxSize().background(colors.backgroundColor)) {
         LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             stickyHeader {
-                Column {
+                Column(modifier = Modifier.background(Color.White)) {
                     ExpensesTotalHeader(uiState.total)
                     AllExpensesHeader()
                 }

@@ -1,10 +1,10 @@
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -17,7 +17,9 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
 import navigation.Navigation
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ui.menu.ui.MenuView
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun App() {
@@ -27,18 +29,19 @@ fun App() {
             val navigator = rememberNavigator()
             val titleType = getTitle(navigator)
 
-
-            Scaffold(
+            MenuView()
+            /*Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 topBar = {
                     TopAppBar(
-                        elevation = 0.dp,
                         title = {
                             Text(text = titleType.value,
                                 fontSize = 25.sp,
                                 color = colors.textColor)
                         },
-                        backgroundColor = colors.backgroundColor,
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = colors.backgroundColor
+                        ),
                         navigationIcon = {
                             IconButton(onClick = {
                                 navigator.popBackStack()
@@ -56,7 +59,7 @@ fun App() {
                 floatingActionButton =  {
                     if(titleType == TitleType.DASHBOARD) {
                         FloatingActionButton(
-                            backgroundColor = colors.addIconColor,
+                            containerColor = colors.addIconColor,
                             contentColor = Color.White,
                             onClick = { navigator.navigate("addExpense") }
                         ) {
@@ -70,7 +73,7 @@ fun App() {
                 }
             ) {
                 Navigation(navigator)
-            }
+            }*/
         }
     }
 }
