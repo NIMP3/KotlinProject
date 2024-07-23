@@ -34,7 +34,7 @@ fun ExpensesScreen(uiState: ExpensesUiState, onExpenseClick: (expense: Expense) 
     Box(Modifier.fillMaxSize().background(colors.backgroundColor)) {
         LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             stickyHeader {
-                Column(modifier = Modifier.background(Color.White)) {
+                Column(modifier = Modifier.background(Color.White).padding(top = 48.dp)) {
                     ExpensesTotalHeader(uiState.total)
                     AllExpensesHeader()
                 }
@@ -52,7 +52,8 @@ fun ExpensesTotalHeader(total: Double) {
     Card(
         shape = RoundedCornerShape(20), colors = CardDefaults.cardColors(
             containerColor = Color.Black
-        ), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ) {
         Box(
             modifier = Modifier.fillMaxWidth().height(130.dp).padding(16.dp),

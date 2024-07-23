@@ -2,6 +2,8 @@ package ui.menu.ui
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,13 +18,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import getColorsTheme
+import ui.menu.data.Project
 
 
 @Composable
 fun MenuView() {
+    val projects = Project.createProjectList()
+
     Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
         HeaderMenu()
-        MenuBody(modifier = Modifier.weight(1f))
+        MenuBody(modifier = Modifier.weight(1f), projects)
     }
 }
 
@@ -60,6 +65,24 @@ fun HeaderMenu() {
 }
 
 @Composable
-fun MenuBody(modifier: Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {  }
+fun MenuBody(modifier: Modifier, projects: List<Project>) {
+    val colors = getColorsTheme()
+
+    Column(modifier = modifier.fillMaxSize()) {
+        Text(
+            text = "Projects",
+            fontSize = 18.sp,
+            fontFamily = FontFamily.SansSerif,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Start,
+            color = colors.textColor,
+            modifier = Modifier.padding(16.dp)
+        )
+
+        LazyRow {
+            items (projects) { project ->
+                ProjectCardView(project)
+            }
+        }
+    }
 }
