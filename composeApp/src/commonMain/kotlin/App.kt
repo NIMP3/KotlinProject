@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.TitleType
+import modules.movies.ui.MoviesScreen
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
@@ -28,7 +29,8 @@ fun App() {
             val navigator = rememberNavigator()
             val titleType = getTitle(navigator)
 
-            MenuView()
+            //MenuView()
+            MoviesScreen()
             /*Scaffold(
                 modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing),
                 topBar = {
