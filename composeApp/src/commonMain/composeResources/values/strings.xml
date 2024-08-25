@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">KotlinProject</string>
     <string name="app_movies">Movies</string>
+    <string name="back">Atras</string>
 </resources>

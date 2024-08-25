@@ -46,6 +46,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
+            implementation(libs.androidx.navigation.compose)
 
             //Navigation PreCompose
             api("moe.tlaster:precompose:1.6.0")

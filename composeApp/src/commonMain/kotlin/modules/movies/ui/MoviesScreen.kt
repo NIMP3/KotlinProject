@@ -1,5 +1,6 @@
 package modules.movies.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -24,10 +25,11 @@ import modules.movies.data.Movie
 import modules.movies.data.movies
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import ui.common.Screen
 
 @OptIn(ExperimentalCoilApi::class, ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun MoviesScreen() {
+fun MoviesScreen(onMovieClick: (Movie) -> Unit) {
    val colors = getColorsTheme()
    setSingletonImageLoaderFactory { context ->
       ImageLoader.Builder(context)
@@ -36,7 +38,7 @@ fun MoviesScreen() {
          .build()
    }
    
-   Surface(modifier = Modifier.fillMaxSize()) {
+   Screen {
       val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
       Scaffold(
          topBar = {
@@ -55,7 +57,7 @@ fun MoviesScreen() {
             modifier = Modifier.padding(padding)
          ) {
             items(movies, key = {it.id}) {
-               MovieItem(movie = it)
+               MovieItem(movie = it, onClick = { onMovieClick(it) })
             }
          }
       }
@@ -63,10 +65,10 @@ fun MoviesScreen() {
 }
 
 @Composable
-fun MovieItem(movie: Movie) {
+fun MovieItem(movie: Movie, onClick: () -> Unit) {
    val colors = getColorsTheme()
    
-   Column {
+   Column(modifier = Modifier.clickable { onClick() }) {
       AsyncImage(
          model = movie.poster,
          contentDescription = movie.title,

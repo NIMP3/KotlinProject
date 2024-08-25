@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import data.TitleType
+import modules.movies.ui.DetailScreen
 import modules.movies.ui.MoviesScreen
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.Navigator
@@ -23,6 +25,9 @@ import ui.menu.ui.MenuView
 @Composable
 @Preview
 fun App() {
+    val navHostController = rememberNavController()
+    Navigation(navHostController)
+    /*
     PreComposeApp {
         val colors = getColorsTheme()
         AppTheme {
@@ -30,7 +35,7 @@ fun App() {
             val titleType = getTitle(navigator)
 
             //MenuView()
-            MoviesScreen()
+            //MoviesScreen()
             /*Scaffold(
                 modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing),
                 topBar = {
@@ -76,7 +81,7 @@ fun App() {
                 Navigation(navigator)
             }*/
         }
-    }
+    }*/
 }
 
 @Composable
