@@ -1,4 +1,5 @@
-import moe.tlaster.precompose.viewmodel.ViewModel
+import androidx.lifecycle.ViewModel
+
 
 class MainViewModel: ViewModel() {
     

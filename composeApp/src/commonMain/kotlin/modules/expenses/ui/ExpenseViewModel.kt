@@ -1,5 +1,7 @@
 package presentation
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import domain.ExpenseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -7,8 +9,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import model.Expense
 import model.ExpenseCategory
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 
 data class ExpensesUiState(
     val expenses: List<Expense> = emptyList(),

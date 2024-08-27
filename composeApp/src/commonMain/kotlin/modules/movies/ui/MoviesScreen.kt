@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -29,7 +30,7 @@ import ui.common.Screen
 
 @OptIn(ExperimentalCoilApi::class, ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun MoviesScreen(onMovieClick: (Movie) -> Unit) {
+fun MoviesScreen(viewModel: MoviesViewModel, onMovieClick: (Movie) -> Unit) {
    val colors = getColorsTheme()
    setSingletonImageLoaderFactory { context ->
       ImageLoader.Builder(context)
@@ -49,6 +50,16 @@ fun MoviesScreen(onMovieClick: (Movie) -> Unit) {
          },
          modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
       ) { padding ->
+         val state = viewModel.state
+         if (state.loading) {
+            Box(
+               modifier = Modifier.fillMaxSize().padding(padding),
+               contentAlignment = Alignment.Center) {
+
+               CircularProgressIndicator( )
+            }
+         }
+
          LazyVerticalGrid(
             columns = GridCells.Adaptive(120.dp),
             contentPadding = PaddingValues(4.dp),
@@ -56,7 +67,7 @@ fun MoviesScreen(onMovieClick: (Movie) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(4.dp),
             modifier = Modifier.padding(padding)
          ) {
-            items(movies, key = {it.id}) {
+            items(state.movies, key = {it.id}) {
                MovieItem(movie = it, onClick = { onMovieClick(it) })
             }
          }
